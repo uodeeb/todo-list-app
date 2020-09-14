@@ -1,0 +1,47 @@
+* {
+    margin: 0 auto;
+    padding: 0px;
+}
+
+#main__cont{
+    margin-top: 10vh;
+    background-color: peru;
+    width: 50vw;
+    height: auto;
+    padding: 5vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+#todo__form {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#todo__form *{
+    padding: 3vh;
+}
+
+#butt {
+    margin: 2vh;
+    width: 20vw;
+    align-self: center;
+}
+
+
+.item__ok{
+    border: 1px solid #000;
+    margin: 2vh;
+    padding: 5vh;
+    background-color: papayawhip;
+}
+
+.item__err{
+    border: 1px solid red;
+    margin: 2vh;
+    padding: 5vh;
+    color: darkred;
+}
