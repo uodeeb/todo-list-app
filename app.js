@@ -1,58 +1,73 @@
-// selectors
+/*--------------------project plan--------------------- */
+/*
+---to do----1] prevent user from entering the same statement
+        ----2] item numbers to be added to each item
+        ----3] add date and time
+        ----4] delete items
+        ----5] confirm items
+*/
 
-// selecting a single HTML element
-var mainCont= document.getElementById('main__cont');
 
-//selecting  a group of elements by thier class name
-var main=document.getElementsByClassName('main');
 
-//selecting a group of elements by thier tag name
-var mainEle=document.getElementsByTagName('div');
 
-console.log(mainCont)
-console.log(main)
-console.log(mainEle)
 
-// selecting a single element using the querySelector
-var mainCont02= document.querySelector('div')
 
-// selecting a group of elements
-var group=document.querySelectorAll('div')
 
-console.log(mainCont02)
-console.log(group)
+// // selectors
 
-// to create a new HTML element
+// // selecting a single HTML element
+// var mainCont= document.getElementById('main__cont');
 
-var newEle=document.createElement('section');
+// //selecting  a group of elements by thier class name
+// var main=document.getElementsByClassName('main');
 
-// to add a new element to the page
+// //selecting a group of elements by thier tag name
+// var mainEle=document.getElementsByTagName('div');
 
-mainCont.appendChild(newEle);
+// console.log(mainCont)
+// console.log(main)
+// console.log(mainEle)
 
-console.log(newEle)
+// // selecting a single element using the querySelector
+// var mainCont02= document.querySelector('div')
 
-// to add a text inside any element
+// // selecting a group of elements
+// var group=document.querySelectorAll('div')
 
-newEle.textContent="this is a new element!";
+// console.log(mainCont02)
+// console.log(group)
 
-// to add attributes
-newEle.setAttribute('id', 'new')
-newEle.setAttribute('class', 'new__ele')
+// // to create a new HTML element
 
-if(newEle.hasAttribute("id")){
-    console.log(newEle.getAttribute("id"))
-}
-// add new HTML element inside the target
-newEle.innerHTML= '<ul id="list"></ul>';
+// var newEle=document.createElement('section');
 
-// add classes
+// // to add a new element to the page
 
-newEle.className= "newClass";
-newEle.classList.add("new__class02");
+// mainCont.appendChild(newEle);
 
-//remove classes
-newEle.classList.remove("new__class02");
+// console.log(newEle)
+
+// // to add a text inside any element
+
+// newEle.textContent="this is a new element!";
+
+// // to add attributes
+// newEle.setAttribute('id', 'new')
+// newEle.setAttribute('class', 'new__ele')
+
+// if(newEle.hasAttribute("id")){
+//     console.log(newEle.getAttribute("id"))
+// }
+// // add new HTML element inside the target
+// newEle.innerHTML= '<ul id="list"></ul>';
+
+// // add classes
+
+// newEle.className= "newClass";
+// newEle.classList.add("new__class02");
+
+// //remove classes
+// newEle.classList.remove("new__class02");
 
 
 
@@ -68,7 +83,10 @@ console.log(submit)
 
 // adding an event listener
 submit.addEventListener('click', submitData);
+// collecting all list items
 
+var msgList=[];
+var confirmedMsgs=[];
 
 //create the submit function
 function submitData(event){
@@ -77,19 +95,83 @@ function submitData(event){
     console.log(msg);
     var msgCont=document.getElementById("msg__cont");
     // msgCont.textContent= msg;
-    var item=document.createElement('div');
-    if(msg !== ""){
-        item.textContent=msg;
+    var item=document.createElement('li');
+
+    if((msg !== "") && (!msgList.includes(msg))){
+        msgList.push(msg);
+        console.log(msgList);
+        var list=document.createElement('ul')
+        var msgStyled=`<span class="num">${(msgList.indexOf(msg) + 1)}</span><span>${date()}</span>
+        <h4 class="txt">${msg}</h4><span class="close">x</span><span class="ok">ok</span>`;
+        item.innerHTML= msgStyled;
         item.classList.add('item__ok');
-        msgCont.appendChild(item);
+        list.classList.add("list")
+        list.appendChild(item)
+        msgCont.appendChild(list); 
+        ok(msg);   
+        close();    
     }else if(msg === ""){
         var error=document.createElement('div');
         error.textContent= "Please Write Something To Be Added";
         error.classList.add("item__err");
         var errorCont=document.getElementById('err__cont');
         errorCont.appendChild(error);
-
     }
-    
 
+
+}
+
+function ok(msg){
+    var ok=document.getElementsByClassName("ok");
+    if(ok){
+        console.log(ok);
+        var okArr=Array.from(ok)
+        console.log(okArr);
+       for(i=0; i<okArr.length; i++){
+        console.log(okArr[i]);
+        okArr[i].addEventListener('click', function(){
+            if(!confirmedMsgs.includes(msg)){
+                confirmedMsgs.push(msg);
+                console.log(confirmedMsgs)
+            }
+            
+        })
+       }
+    }else{
+        console.log("not here")
+    }
+}
+
+function close(){
+    var close=document.getElementsByClassName("close");
+    if(close){
+        console.log(close);
+        var closeArr=Array.from(close)
+        console.log(closeArr);
+       for(i=0; i<closeArr.length; i++){
+        console.log(closeArr[i]);
+        closeArr[i].addEventListener('click', function(){
+            closeArr.forEach(function(item){
+            console.log(item.parentElement);
+            item.parentElement.remove();
+            })
+            
+        })
+       }
+    }else{
+        console.log("noot heeeere");
+    }
+}
+
+
+function date(){
+    var today= new Date();
+    var month=today.getMonth()+ 1;
+    var year=today.getFullYear();
+    var date=today.getDate();
+    var hours=today.getHours();
+    var min=today.getMinutes();
+    var sec=today.getSeconds();
+    var currentDate=`${date}/${month}/${year}--${hours}:${min}:${sec}`;
+    return currentDate;
 }

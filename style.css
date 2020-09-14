@@ -45,8 +45,50 @@
     padding: 5vh;
     color: darkred;
 }
+.list li{
+    display: flex;
+    padding: 0;
+    justify-content: center;
+}
 
+.num {
+    color: #fff;
+    background-color: darkkhaki;
+    width: 5vw;
+    height: 5vh;
+    margin: 0px 7px 0px 0px;
+    flex: 1;
+}
+.txt {
+flex: 4;
 
+}
+.close {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: darkkhaki;
+    width: 5vw;
+    height: 5vh;
+    margin: 0px 0px 0px 7px;
+    justify-self: end;
+    flex:1;
+}
+.close:hover{
+    background-color: darkslategrey;
+    color: #fff;
+}
+.ok {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: darkkhaki;
+    width: 5vw;
+    height: 5vh;
+    margin: 0px 0px 0px 7px;
+    justify-self: end;
+    flex: 1;
+}
+.ok:hover{
+    background-color: darkslategrey;
+    color: #fff;
+}
 /*-------------------small devices-----------------------*/
 @media only screen and (max-width: 767px){
     #main__cont {
