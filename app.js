@@ -87,6 +87,7 @@ submit.addEventListener('click', submitData);
 
 var msgList=[];
 var confirmedMsgs=[];
+let msggAll=[];
 
 //create the submit function
 function submitData(event){
@@ -98,12 +99,17 @@ function submitData(event){
     var item=document.createElement('li');
 
     if((msg !== "") && (!msgList.includes(msg))){
+        // 
         msgList.push(msg);
         console.log(msgList);
-        var list=document.createElement('ul')
-        var msgStyled=`<span class="num">${(msgList.indexOf(msg) + 1)}</span><span>${date()}</span>
-        <h4 class="txt">${msg}</h4><span class="close">x</span><span class="ok">ok</span>`;
-        item.innerHTML= msgStyled;
+        var list=document.createElement('ul');
+        // var msgStyled=`<span class="num">${(msgList.indexOf(msg) + 1)}</span><span>${date()}</span>
+        // <h4 class="txt">${msg}</h4><span class="close">x</span><span class="ok">ok</span>`;
+        // item.innerHTML= msgStyled;
+        let msgg= new MassegeGenerator((msgList.indexOf(msg) + 1), `${date()}`, `${time()}`, msg )
+        msggAll.push(msgg);
+        item.innerHTML=msgg.generateElement();
+        console.log(msggAll)
         item.classList.add('item__ok');
         list.classList.add("list")
         list.appendChild(item)
@@ -169,9 +175,33 @@ function date(){
     var month=today.getMonth()+ 1;
     var year=today.getFullYear();
     var date=today.getDate();
-    var hours=today.getHours();
-    var min=today.getMinutes();
-    var sec=today.getSeconds();
-    var currentDate=`${date}/${month}/${year}--${hours}:${min}:${sec}`;
+    
+    var currentDate=`${date}/${month}/${year}`;
     return currentDate;
 }
+
+// create the time function
+function time(){
+    let today= new Date();
+    let hours=today.getHours();
+    let min=today.getMinutes();
+    let sec=today.getSeconds();
+    let currentTime=`${hours}:${min}:${sec}`;
+    return currentTime;
+}
+time()
+// testing the objects
+function MassegeGenerator(msgId, msgDate, msgTime, msgContent){
+    this.id=msgId
+    this.content=msgContent
+    this.date=msgDate
+    this.time=msgTime
+    this.generate= ()=>{
+        console.log(`${msgId}- ${msgDate}>> ${msgContent} ${msgTime}`);
+    }
+    this.generateElement= ()=>{
+        return `<span class="num">${msgId}</span><span>${msgDate} ${msgTime}</span>
+        <h4 class="txt">${msgContent}</h4><span class="close">x</span><span class="ok">ok</span>`;
+    }
+}
+

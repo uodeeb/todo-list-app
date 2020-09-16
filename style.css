@@ -4,19 +4,12 @@
 }
 
 #main__cont{
-<<<<<<< HEAD
+
     /* margin-top: 10vh; */
     background-color: rgb(46, 153, 224);
     width: 100vw;
     height: 100vh;
-    /* padding: 5vh; */
-=======
-    margin-top: 10vh;
     background-color: rgb(46, 153, 224);
-    width: 50vw;
-    height: auto;
-    padding: 5vh;
->>>>>>> d85afb2a0f450cb3f97bd764a91583ec617af85b
     display: flex;
     justify-content: center;
     flex-direction: column;
