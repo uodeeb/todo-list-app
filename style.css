@@ -3,6 +3,10 @@
     padding: 0px;
 }
 
+#head {
+    display: flex;
+    flex-direction: column;
+}
 #main__cont{
 
     /* margin-top: 10vh; */
@@ -260,4 +264,24 @@ flex: 4;
 /*-------------------large devices-----------------------*/
 @media only screen and (min-width: 999px){
     
+}
+
+
+.msg__div {
+    display: flex;
+    width: 90vw;
+    height: 10vh;
+    font-size: 20pt;
+    justify-content: center;
+    align-items: center;
+}
+
+.msg__div >h3 {
+    flex: 4;
+    border: 1px solid #000;
+}
+
+.msg__div >p {
+    flex: 2;
+    border: 1px solid #000;
 }

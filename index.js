@@ -15,7 +15,7 @@ const submit=document.getElementById("butt");
 // store the masseges
 let msgList=[];
 let msgObjList=[];
-
+let todayMsgs=[]
 /*---------------------create the submit func------------- */
 let submitData= (e)=>{
     e.preventDefault();
@@ -33,6 +33,7 @@ let submitData= (e)=>{
         addClasss(list, "list")
         list.appendChild(item)
         msgCont.appendChild(list); 
+        getArrData()
     }else if(msg === ""){
         var error=document.createElement('div');
         error.textContent= "Please Write Something To Be Added";
@@ -87,19 +88,55 @@ function MassegeGenerator (msgId, msgDate, msgTime, msgContent){
         <h4 class="txt">${this.content}</h4><span class="close">x</span><span class="ok">ok</span>`;
     }
 }
-let x=()=>{
-    for (msg of msgObjList){
-       if(msg.date === userDate){
+// let x=()=>{
+//     for (msg of msgObjList){
+//        if(msg.date === userDate){
            
-       }
-    }
-}
+//        }
+//     }
+// }
 /*------------------------create main func-------------------- */
 let init=()=>{
     submit.addEventListener('click', submitData);
 
 }
 init();
+
+
+
+/**
+ * manipulate the data inside the array
+ */
+let getArrData=()=>{
+    let list=msgObjList
+    
+    const tab=document.getElementById("butt02")
+    console.log(list)
+    for(i=0; i<list.length; i++){
+        console.log(list[i])
+    }
+    for(item of list){
+        console.log(item)
+    }
+    list.forEach((listItem)=>{
+        console.log(listItem.content)
+    })
+
+    list.map(item=>{
+        console.log(item.date)
+        if(item.date === "16/9/2020"){
+            pushToArr(item, todayMsgs)
+            tab.addEventListener("click", ()=>{
+            const msgCont=document.getElementById("msg__cont");
+                msgCont.textContent=todayMsgs[0].content
+                
+            })
+        }
+        console.log(todayMsgs)
+    })
+    
+
+}
 
 
 
